@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller,
     Session;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator; //追加
 
 class UserController extends Controller
 {
@@ -123,6 +124,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //TODO 登録処理
+        $user = User::where('email', $request->email)->first();
+        $errorMessage = 'このメールアドレスはすでに使用されています';
+        if ($user == true) {
+            return view('signup', compact('errorMessage'));
+        }
 
         return redirect('/');
     }
