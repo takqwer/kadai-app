@@ -123,12 +123,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'email' => ['required',  'email', 'alpha_num'],
+            'password' => 'required|min:8',
+        ];
+
+        $messages = ['required' => '必須項目です', 'email' => '有効なメールアドレスを入力してください', 'min' => 'パスワードを8文字以上にしてください。', 'alpha_num' => '半角英数字、記号のみ入力できます。'];
+
+        Validator::make($request->all(), $rules, $messages)->validate();
         //TODO 登録処理
-        $user = User::where('email', $request->email)->first();
-        $errorMessage = 'このメールアドレスはすでに使用されています';
-        if ($user == true) {
-            return view('signup', compact('errorMessage'));
-        }
+        $user = new User;
+        $user->name = $request->account;
+        $user->email = $request->email;
+        $user->biography = "未設定";
+        $user->password = $request->password;
+        $user->save();
+
+        Session::put('user', $user);
 
         return redirect('/');
     }

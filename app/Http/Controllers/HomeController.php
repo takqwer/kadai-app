@@ -35,8 +35,12 @@ class HomeController extends Controller
             }
         }
 
+        if (count($posts) > [0]) {
+            $posts = $this->sort($posts);
+        }
+
         // 投稿を時系列順に並べ替え
-        $posts = $this->sort($posts);
+        //$posts = $this->sort($posts);
 
         // 画面表示
         return view('home', compact('posts'));

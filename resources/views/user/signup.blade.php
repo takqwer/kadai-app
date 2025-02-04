@@ -14,8 +14,12 @@
 <body class="">
     <x-header></x-header>
     <div class="page signup-page">
-        <form class="form" action="/signup-page" method="post">
+        <form class="form" action="/signup" method="post">
             @csrf
+            <div class="form-item account">
+                <label for="account">アカウント名</label>
+                <input type="text" id="account" name="account" />
+            </div>
             <div class="form-item email">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" />
@@ -24,15 +28,27 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" />
             </div>
-            @if ($errorMessage)
-            <div class="error-message font-red">{{ $errorMessage }}</div>
-            @endif
             <div class="register-button">
                 <button class="button-white" type="submit">register</button>
             </div>
         </form>
     </div>
 </body>
+@error ('password')
+<div class="mt-3">
+    <p class="text-red-500">
+        {{ $message }}
+    </p>
+</div>
+@enderror
+
+@error ('email')
+<div class="mt-3">
+    <p class="text-red-500">
+        {{ $message }}
+    </p>
+</div>
+@enderror
 <script src="{{ asset('/js/app.js') }}"></script>
 <style scoped>
     .signup-page {
@@ -74,20 +90,20 @@
     }
 </style>
 
-<h3>バリデーションルール</h3>
-<h4>メールアドレス</h4>
-<ul>
-    <li>●●●@×××の形式になっていること</li>
-    <li>半角英数、記号のみを許容すること</li>
-</ul>
-<h4>パスワード</h4>
-<ul>
-    <li>半角英数、記号のみを許容すること</li>
-    <li>8文字以上であること</li>
-</ul>
-<p>
-    JavascriptとUserControllorの両方で同じバリデーションを設けること
-</p>
+<!-- <h3>バリデーションルール</h3> -->
+<!-- <h4>メールアドレス</h4> -->
+<!-- <ul> -->
+<!-- <li>●●●@×××の形式になっていること</li> -->
+<!-- <li>半角英数、記号のみを許容すること</li> -->
+<!-- </ul> -->
+<!-- <h4>パスワード</h4> -->
+<!-- <ul> -->
+<!-- <li>半角英数、記号のみを許容すること</li> -->
+<!-- <li>8文字以上であること</li> -->
+<!-- </ul> -->
+<!-- <p> -->
+<!-- JavascriptとUserControllorの両方で同じバリデーションを設けること -->
+<!-- </p> -->
 </div>
 </body>
 <script src="{{ asset('/js/app.js') }}"></script>
