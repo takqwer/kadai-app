@@ -124,11 +124,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'email' => ['required',  'email', 'alpha_num'],
+            'email' => ['required',  'email:dns,strict,filter', 'regex:/^[!-~]+$/'],
             'password' => 'required|min:8',
         ];
 
-        $messages = ['required' => '必須項目です', 'email' => '有効なメールアドレスを入力してください', 'min' => 'パスワードを8文字以上にしてください。', 'alpha_num' => '半角英数字、記号のみ入力できます。'];
+        $messages = ['required' => '必須項目です', 'email' => '有効なメールアドレスを入力してください', 'min' => 'パスワードを8文字以上にしてください。', 'regex:/^[!-~]+$/' => '半角英数字、記号のみ入力できます。'];
 
         Validator::make($request->all(), $rules, $messages)->validate();
         //TODO 登録処理
