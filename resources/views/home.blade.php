@@ -16,6 +16,9 @@
     <x-header></x-header>
     <div class="page home-page">
         <div class="page-title">ホーム</div>
+        @if (count($posts) == 0)
+        <p class="text-black text-xl">誰かをフォローしてみましょう</p>
+        @endif
         <div class="post-list">
             @foreach ($posts as $post)
             <div class="post">
@@ -51,34 +54,34 @@
         color: gray;
         padding-left: 10px;
     }
-    
+
     .home-page .post-list {
         margin-top: 10px;
     }
-    
+
     .home-page .post {
         display: flex;
         width: 100vw;
         padding: 0 10px;
     }
-    
+
     .home-page .post .container {
         width: 100%;
     }
-    
+
     .home-page .user-icon {
         width: 40px;
         height: 40px;
     }
-    
+
     .home-page .user-name {
         line-height: 40px;
     }
-    
+
     .home-page .content {
         font-size: 14px;
     }
-    
+
     .home-page .time-stamp {
         font-size: 8px;
         text-align: end;
